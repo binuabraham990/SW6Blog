@@ -8,6 +8,7 @@ import defaultSearchConfiguration from './default-search-configuration';
 
 Shopware.Component.register('twohats-author-list', () => import('./page/twohats-author-list'));
 Shopware.Component.register('twohats-author-detail', () => import('./page/twohats-author-detail'));
+Shopware.Component.extend('twohats-author-create', 'twohats-author-detail', () => import('./page/twohats-author-create'));
 
 Shopware.Module.register('twohats-author', {
 

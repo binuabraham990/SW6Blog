@@ -1,0 +1,15 @@
+{% block twohats_author_create %}
+    <sw-page class="twohats-author-create">
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block twohats_author_create_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                    :save-changes-function="saveOnLanguageChange"
+                    :save-permission="acl.can('author.create')"
+                    @on-change="onChangeLanguage"
+                    />
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

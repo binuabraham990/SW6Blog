@@ -8,6 +8,7 @@ import defaultSearchConfiguration from './default-search-configuration';
 
 Shopware.Component.register('twohats-blog-list', () => import('./page/twohats-blog-list'));
 Shopware.Component.register('twohats-blog-detail', () => import('./page/twohats-blog-detail'));
+Shopware.Component.extend('twohats-blog-create', 'twohats-blog-detail', () => import('./page/twohats-blog-create'));
 Shopware.Component.register('twohats-blog-detail-base', () => import('./component/twohats-blog-detail-base'));
 Shopware.Component.register('twohats-blog-media-form', () => import('./component/twohats-blog-media-form'));
 

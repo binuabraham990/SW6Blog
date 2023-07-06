@@ -14,5 +14,12 @@
         <service id="TwoHatsBlogModule\Core\Content\Blog\BlogMedia\BlogMediaDefinition">
             <tag name="shopware.entity.definition" entity="twohats_blog_blog_media" />
         </service>
+        
+        
+        <service id="TwoHatsBlogModule\Subscriber\CmsPageLoadedEventSubscriber">
+            <argument type="service" id="twohats_blog_blog.repository"/>
+            
+            <tag name="kernel.event_subscriber"/>
+        </service>
     </services>
 </container>

@@ -10,11 +10,15 @@
                 "column-name": "Name",
                 "column-nickname": "Nickname",
                 "contextMenuView": "View/Edit",
-                "contextMenuDelete": "Remove"
+                "contextMenuDelete": "Remove",
+                "buttonAddAuthor": "Add new author",
+                "deleteConfirmText": "Confirm if you really want to delete",
+                "buttonCancel": "Cancel",
+                "buttonDelete": "Delete"
             }
         },
         "detail":   {
-            "textHeadline": "Blog Author Change",
+            "textHeadline": "New Author",
             "buttonCancel": "Cancel",
             "buttonSave": "Save",
             "cardTitleAuthor": "Author update",
@@ -23,6 +27,10 @@
             "labelNickname": "Nickname",
             "placeholderNickname": "Insert nickname...",
             "imageLabel": "Avatar"
+        },
+        "create":   {
+            "buttonCancel": "Cancel",
+            "buttonSave": "Save"
         }
     }
 }

@@ -1,0 +1,15 @@
+{
+    "twohats-blog-cms": {
+        "elements": {
+            "twohats-blog": {
+                "label": "Blog",
+                "config": {
+                    "number-of-blogs": {
+                        "label": "Number of blogs",
+                        "placeholder": "Insert number of blogs"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{% block block_twohats_blog %}
+    {% set element = block.slots.getSlot('twoHatBlog') %}
+    {% set columns = 1 %}
+
+    <div class="col-12" data-cms-element-id="{{ element.id }}">
+        {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+    </div>
+{% endblock %}

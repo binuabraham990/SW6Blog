@@ -1,0 +1,10 @@
+{% block sw_cms_block_twohats_blog %}
+    <div class="sw-cms-block-twohats-blog">
+        <slot name="twoHatBlog">
+            {% block sw_cms_block_twohats_blog_slot_twoHatBlog %}
+                <img class="sw-cms-block-twohats-blog-img"
+                     :src="'twohatsblogmodule/static/img/blog.png' | asset">
+            {% endblock %}
+        </slot>
+    </div>
+{% endblock %}

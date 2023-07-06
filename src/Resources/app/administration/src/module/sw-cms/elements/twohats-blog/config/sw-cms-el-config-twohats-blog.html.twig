@@ -1,0 +1,11 @@
+{% block sw_cms_el_config_twohats_blog_config %}
+    <sw-number-field
+        v-model="numberOfBlogs"
+        :min="0"
+        :max="24"
+        class="twohats-blog-numberofblogs-config"
+        :label="$tc('twohats-blog-cms.elements.twohats-blog.config.number-of-blogs.label')"
+        :placeholder="$tc('twohats-blog-cms.elements.twohats-blog.config.number-of-blogs.placeholder')"
+        />
+    </sw-number-field>
+{% endblock %}

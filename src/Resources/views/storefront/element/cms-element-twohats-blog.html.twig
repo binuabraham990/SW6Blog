@@ -1,0 +1,20 @@
+{% block element_twohats_blog %}
+
+    {%  set config = element.fieldConfig.elements %}
+    <div class="cms-element-twohats-blog" style="height: 100%; width: 100%">
+
+        {% block element_twohats_blog_content %}
+            <div class="cms-el-twohats-blog">
+                <div class="row">
+                    {% for key,blog in context.context.extensions.twohats_blogs.blogs|slice(0, config.numberOfBlogs.value) %}
+                        <div class="col-3">
+                            <div class="box">
+                                {{ dump(blog) }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

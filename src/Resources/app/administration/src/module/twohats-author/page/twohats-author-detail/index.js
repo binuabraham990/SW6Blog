@@ -96,7 +96,6 @@ export default {
         },
 
         loadEntityData() {
-            console.log(this.authorId);
             this.isLoading = true;
 
             this.authorRepository.get(this.authorId, Shopware.Context.api, this.defaultCriteria)
@@ -112,6 +111,7 @@ export default {
         saveFinish() {
             this.isSaveSuccessful = true;
         },
+        
         onSave() {
             this.isSaveSuccessful = false;
             this.isLoading = true;

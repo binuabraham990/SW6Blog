@@ -69,8 +69,8 @@
                             ref="propertyList"
                             class="twohats-blog-list-grid"
                             :items="blogs"
-                            :columns="getAuthorColumns()"
-                            :repository="authorRepository"
+                            :columns="getBlogColumns()"
+                            :repository="blogRepository"
                             :show-selection="false"
                             :show-settings="true"
                             :full-page="true"
@@ -115,6 +115,37 @@
                                 </template>
                             {% endblock %}
 
+                            {% block twohats_blog_list_grid_action_modals %}
+                                <template #action-modals="{ item }">
+                                    <sw-modal 
+                                        v-if="showDeleteModal === item.id"
+                                        variant="small"
+                                        :title="$tc('global.default.warning')"
+                                        @modal-close='onCloseDeleteModal'
+                                        >
+                                        <p class='twohats-blog-list-delete-modal'>
+                                            {{ $tc('twohats-blog.page.list.deleteConfirmText') }}
+                                        </p>
+
+                                        <template #modal-footer>
+                                            <sw-button
+                                                size="small"
+                                                @click="onCloseDeleteModal"
+                                                >
+                                                {{ $tc('twohats-blog.page.list.buttonCancel') }}
+                                            </sw-button>
+
+                                            <sw-button
+                                                variant="danger"
+                                                size="small"
+                                                @click="onConfirmDelete(item.id)"
+                                                >
+                                                {{ $tc('twohats-blog.page.list.buttonDelete') }}
+                                            </sw-button>
+                                        </template>
+                                    </sw-modal>
+                                </template>
+                            {% endblock %}
 
                         </sw-entity-listing>
                     {% endblock %}

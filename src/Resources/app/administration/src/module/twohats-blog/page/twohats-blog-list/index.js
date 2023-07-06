@@ -34,7 +34,7 @@ export default {
     },
 
     computed: {
-        authorRepository() {
+        blogRepository() {
             return this.repositoryFactory.create('twohats_blog_blog');
         },
 
@@ -74,7 +74,7 @@ export default {
                 criteria.resetSorting();
             }
 
-            return this.authorRepository.search(criteria).then((items) => {
+            return this.blogRepository.search(criteria).then((items) => {
                 this.total = items.total;
                 this.blogs = items;
                 this.isLoading = false;
@@ -85,7 +85,23 @@ export default {
             });
         },
 
-        getAuthorColumns() {
+        onDelete(itemId) {
+            this.showDeleteModal = itemId;
+        },
+        
+        onCloseDeleteModal()    {
+            this.showDeleteModal = false;
+        },
+        
+        onConfirmDelete(itemId) {
+            this.blogRepository.delete(itemId).then(() =>   {
+                this.showDeleteModal = false;
+                
+                this.getList();
+            });
+        },
+
+        getBlogColumns() {
             return [{
                     property: 'title',
                     label: 'twohats-blog.page.list.column-name',

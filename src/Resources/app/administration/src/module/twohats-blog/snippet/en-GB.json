@@ -11,17 +11,20 @@
                 "column-description": "Description",
                 "column-author": "Author",
                 "contextMenuView": "View/Edit",
-                "contextMenuDelete": "Remove"
+                "contextMenuDelete": "Remove",
+                "deleteConfirmText": "Do you really want to delete?",
+                "buttonCancel": "Cancel",
+                "buttonDelete": "Delete"
             }
         },
         "list": {
             "buttonAddBlogs": "Add Blog"
         },
         "detail": {
-            "textHeadline": "Blog",
+            "textHeadline": "New Blog",
             "buttonCancel": "Cancel",
             "buttonSave": "Save",
-            "cardTitleBlog": "View/Update Blog",
+            "cardTitleBlog": "Content",
             "labelTitle": "Title",
             "placeholderTitle": "Insert title...",
             "labelDescription": "Description",

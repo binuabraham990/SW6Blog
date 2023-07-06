@@ -7,7 +7,6 @@ import template from './twohats-blog-detail.html.twig';
 const {Mixin} = Shopware;
 const {Criteria} = Shopware.Data;
 
-// eslint-disable-next-line sw-deprecation-rules/private-feature-declarations
 export default {
     template,
 
@@ -148,10 +147,18 @@ export default {
         },
 
         onMediaSelectionChange(mediaItems) {
+
+            let self = this;
             mediaItems.forEach(function (mediaItem, index) {
-                console.log(mediaItem.id);
-                const blogMedia = this.createBlogMediaAssociation(mediaItem.id);
-                this.blog.media.add(blogMedia);
+                let criteria = new Criteria(1, 1);
+                criteria.addFilter(Criteria.equals('blogId', self.blog.id));
+                criteria.addFilter(Criteria.equals('mediaId', mediaItem.id));
+                self.blogMediaRepository.search(criteria, Shopware.Context.api).then((results) => {
+                    if (results.length <= 0) {
+                        const blogMedia = self.createBlogMediaAssociation(mediaItem.id);
+                        self.blog.media.add(blogMedia);
+                    }
+                });
             });
         },
 
