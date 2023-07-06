@@ -1,0 +1,23 @@
+{
+    "twohats-author": {
+        "label": "Blog Author",
+        "module": {
+            "title": "Blog Author",
+            "description": "Manage blog authors."
+        },
+        "page": {
+            "list": {
+                "column-name": "Name",
+                "column-nickname": "Nickname",
+                "contextMenuView": "View/Edit",
+                "contextMenuDelete": "Remove"
+            }
+        },
+        "detail":   {
+            "textHeadline": "Blog Author Change",
+            "buttonCancel": "Cancel",
+            "buttonSave": "Save",
+            "cardTitleAuthor": "Author update"
+        }
+    }
+}

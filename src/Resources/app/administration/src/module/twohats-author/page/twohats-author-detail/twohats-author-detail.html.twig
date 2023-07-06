@@ -1,0 +1,148 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block twohats_author_detail %}
+    <sw-page class="twohats-author-detail">
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block twohats_author_detail_smart_bar_header %}
+            <template #smart-bar-header>
+
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block twohats_author_detail_smart_bar_header_title %}
+                    <h2>{{ placeholder(author, 'name', $tc('twohats-author.detail.textHeadline')) }}</h2>
+                {% endblock %}
+
+            </template>
+        {% endblock %}
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block twohats_author_detail_smart_bar_actions %}
+            <template #smart-bar-actions>
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block twohats_author_detail_smart_bar_actions_cancel %}
+                    <sw-button
+                        v-tooltip.bottom="tooltipCancel"
+                        class="twohats-author-detail__back-action"
+                        :disabled="isLoading"
+                        @click="onCancel"
+                        >
+                        {{ $tc('twohats-author.detail.buttonCancel') }}
+                    </sw-button>
+                {% endblock %}
+
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block twohats_author_detail_smart_bar_actions_save %}
+                    <sw-button-process
+                        v-tooltip="tooltipSave"
+                        class="twohats-author-detail__save-action"
+                        :is-loading="isLoading"
+                        :process-success="isSaveSuccessful"
+                        :disabled="isLoading || !acl.can('blogs.editor')"
+                        variant="primary"
+                        @process-finish="saveFinish"
+                        @click.prevent="onSave"
+                        >
+                        {{ $tc('twohats-author.detail.buttonSave') }}
+                    </sw-button-process>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block twohats_author_detail_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                    :save-changes-function="saveOnLanguageChange"
+                    :save-permission="acl.can('blogs.editor')"
+                    @on-change="onChangeLanguage"
+                    />
+            </template>
+        {% endblock %}
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block twohats_author_detail_content %}
+            <template #content>
+                <sw-card-view>
+
+                    <div v-show="!isLoading">
+
+                        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                        {% block twohats_author_detail_content_language_info %}
+                            <sw-language-info
+                                :entity-description="placeholder(author, 'name', $tc('twohats-author.detail.textHeadline'))"
+                                />
+                        {% endblock %}
+
+                        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                        {% block twohats_author_detail_content_detail_base %}
+                            {% block twohats_author_detail_content_blog %}
+                                <sw-card
+                                    v-if="author"
+                                    position-identifier="twohats-author-detail-base"
+                                    :title="$tc('twohats-author.detail.cardTitleAuthor')"
+                                    :is-loading="isLoading"
+                                    >
+                                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                                    {% block twohats_author_detail_base_name %}
+                                        <sw-field
+                                            v-model="author.name"
+                                            type="text"
+                                            required
+                                            :label="$tc('twohats-author.detail.labelName')"
+                                            :placeholder="placeholder(author, 'name', $tc('twohats-author.detail.placeholderName'))"
+                                            :disabled="!allowEdit"
+                                            />
+                                    {% endblock %}
+
+                                    {% block twohats_author_detail_base_nickname %}
+                                        <sw-field
+                                            v-model="author.nickname"
+                                            type="text"
+                                            required
+                                            :label="$tc('twohats-author.detail.labelNickname')"
+                                            :placeholder="placeholder(author, 'name', $tc('twohats-author.detail.placeholderNickname'))"
+                                            :disabled="!allowEdit"
+                                            />
+                                    {% endblock %}
+
+                                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                                    {% block sw_category_detail_menu_media %}
+                                        <sw-upload-listener
+                                            :key="author.id + 'uploadListener'"
+                                            :upload-tag="author.id"
+                                            auto-upload
+                                            @media-upload-finish="onSetMediaItem"
+                                            />
+                                        <sw-media-upload-v2
+                                            :key="author.id + 'upload'"
+                                            :label="$tc('twohats-author.detail.imageLabel')"
+                                            variant="regular"
+                                            :disabled="!acl.can('author.editor')"
+                                            :source="mediaItem"
+                                            :upload-tag="author.id"
+                                            :allow-multi-select="false"
+                                            :default-folder="author.getEntityName()"
+                                            @media-drop="onMediaDropped"
+                                            @media-upload-sidebar-open="showMediaModal = true"
+                                            @media-upload-remove-image="onRemoveMediaItem"
+                                            />
+                                    {% endblock %}
+
+                                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                                    {% block sw_category_detail_menu_media_modal %}
+                                        <sw-media-modal-v2
+                                            v-if="showMediaModal"
+                                            :allow-multi-select="false"
+                                            :entity-context="author.getEntityName()"
+                                            @media-modal-selection-change="onMediaSelectionChange"
+                                            @modal-close="showMediaModal = false"
+                                            />
+                                    {% endblock %}
+                                </sw-card>
+                            {% endblock %}
+                        {% endblock %}
+                    </div>
+                </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

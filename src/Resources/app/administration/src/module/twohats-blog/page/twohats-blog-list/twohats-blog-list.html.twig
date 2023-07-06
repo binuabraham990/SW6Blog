@@ -1,0 +1,126 @@
+{% block twohats_blog_list %}
+    <sw-page class="twohats-blog-list">
+
+        {% block twohats_blog_list_search_bar %}
+            <template #search-bar>
+                <sw-search-bar
+                    initial-search-type="Blogs"
+                    :placeholder="$tc('sw-property.general.placeholderSearchBar')"
+                    :initial-search="term"
+                    @search="onSearch"
+                    />
+            </template>
+        {% endblock %}
+
+        {% block twohats_blog_list_smart_bar_header %}
+            <template #smart-bar-header>
+
+                {% block twohats_blog_list_smart_bar_header_title %}
+                    <h2>
+
+                        {% block twohats_blog_list_smart_bar_header_title_text %}
+                            {{ $tc('twohats-blog.label') }}
+                        {% endblock %}
+
+                        {% block twohats_blog_list_smart_bar_header_title_amount %}
+                            <span
+                                v-if="!isLoading"
+                                class="sw-page__smart-bar-amount"
+                                >
+                                ({{ total }})
+                            </span>
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block twohats_blog_list_ %}
+            <template #smart-bar-actions>
+
+                {% block twohats_blog_list_add_button %}
+                    <sw-button
+                        class="twohats_blog-list__button-create"
+                        :disabled="!acl.can('blogs.creator')"
+                        :router-link="{ name: 'twohats.blog.create' }"
+                        variant="primary"
+                        >
+                        {{ $tc('twohats-blog.list.buttonAddBlogs') }}
+                    </sw-button>
+                {% endblock %}
+
+            </template>
+        {% endblock %}
+
+        {% block sw_property_list_language_switch %}
+            <template #language-switch>
+                <sw-language-switch @on-change="onChangeLanguage" />
+            </template>
+        {% endblock %}
+
+        <template #content>
+
+            {% block twohats_blog_list_content %}
+                <div class="twohats-blog-list__content">
+
+                    {% block twohats_blog_list_grid %}
+                        <sw-entity-listing
+                            v-if="entitySearchable"
+                            ref="propertyList"
+                            class="twohats-blog-list-grid"
+                            :items="blogs"
+                            :columns="getAuthorColumns()"
+                            :repository="authorRepository"
+                            :show-selection="false"
+                            :show-settings="true"
+                            :full-page="true"
+                            :sort-by="currentSortBy"
+                            :sort-direction="sortDirection"
+                            :is-loading="isLoading"
+                            :allow-column-edit="true"
+                            :compact-mode="false"
+                            :allow-edit="acl.can('blog.editor')"
+                            :allow-delete="acl.can('blog.deleter')"
+                            :allow-inline-edit="acl.can('blog.editor')"
+                            identifier="twohats-blog-list"
+                            :disable-data-fetching="true"
+                            @column-sort="onSortColumn"
+                            @page-change="onPageChange"
+                            >
+
+                            {% block twohats_blog_list_grid_columns_actions %}
+                                <template
+                                    #actions="{ item }"
+                                    >
+                                    {% block twohats_blog_list_grid_columns_actions_detail %}
+                                        <sw-context-menu-item
+                                            class="twohats-blog-list__edit-action"
+                                            :router-link="{ name: 'twohats.blog.detail', params: { id: item.id } }"
+                                            :disabled="!acl.can('blog.editor')"
+                                            >
+                                            {{ $tc('twohats-blog.page.list.contextMenuView') }}
+                                        </sw-context-menu-item>
+                                    {% endblock %}
+
+                                    {% block twohats_blog_list_grid_columns_actions_delete %}
+                                        <sw-context-menu-item
+                                            class="twohats-blog-list__delete-action"
+                                            variant="danger"
+                                            :disabled=" !acl.can('blog.deleter')"
+                                            @click="onDelete(item.id)"
+                                            >
+                                            {{ $tc('twohats-blog.page.list.contextMenuDelete') }}
+                                        </sw-context-menu-item>
+                                    {% endblock %}
+                                </template>
+                            {% endblock %}
+
+
+                        </sw-entity-listing>
+                    {% endblock %}
+
+                </div>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_product_media_form %}
+    <sw-card 
+        :title="$tc('twohats-blog.detail.cardTitleBlogMedia')"
+        position-identifier="twohats-blog-detail-base-media"
+        :is-loading="isLoading"
+        >
+        <div
+            class="sw-product-media-form"
+            {#    :class="{ 'is--disabled': disabled }"#}
+            >
+            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+            {% block sw_product_media_form_upload %}
+                <sw-upload-listener
+                    v-if="!isLoading"
+                    :upload-tag="blog.id"
+                    auto-upload
+                    @media-upload-finish="successfulUpload"
+                    @media-upload-fail="onUploadFailed"
+                    />
+
+                <sw-media-upload-v2
+                    v-if="!isLoading && acl.can('product.editor')"
+                    variant="regular"
+                    :upload-tag="blog.id"
+                    :scroll-target="$parent.$el"
+                    :default-folder="blog.getEntityName()"
+                    @media-upload-sidebar-open="onOpenMedia"
+                    />
+            {% endblock %}
+
+            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+            {% block sw_product_media_form_grid %}
+                <div class="sw-product-media-form__previews">
+
+                    <div
+                        v-if="!isLoading"
+                        class="twohats-blog-media-form__grid twohats-blog-media-form__column"
+                        :style="gridAutoRows"
+                        >
+                        {%  block twohats_blog_media_form_grid_items %}
+                            <sw-product-image
+                                v-for="mediaItem in mediaItems"
+                                :key="mediaItem.id"
+                                v-draggable="{ dragGroup: 'blog-media', data: mediaItem }"
+                                v-droppable="{ dragGroup: 'blog-media', data: mediaItem }"
+                                {#                                :is-cover="isCover(mediaItem)"#}
+                                :is-placeholder="mediaItem.isPlaceholder"
+                                :media-id="mediaItem.mediaId"
+                                {#                                :show-cover-label="showCoverLabel"#}
+                                {#                                @sw-product-image-delete="removeFile(mediaItem)"#}
+                                {#                                @sw-product-image-cover="markMediaAsCover(mediaItem)"#}
+                                />
+                        {% endblock %}
+                    </div>
+                    {#        <sw-loader v-else />#}
+                </div>
+            {% endblock %}
+        </div>
+    </sw-card>
+{% endblock %}

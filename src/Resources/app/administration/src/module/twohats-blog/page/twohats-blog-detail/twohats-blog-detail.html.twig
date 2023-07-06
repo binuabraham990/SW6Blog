@@ -1,0 +1,102 @@
+{% block twohats_blog_detail %}
+    <sw-page class="twohats-blog-detail">
+
+        {% block twohats_blog_detail_smart_bar_header %}
+            <template #smart-bar-header>
+
+                {% block twohats_blog_detail_smart_bar_header_title %}
+                    <h2>{{ placeholder(blog, 'name', $tc('twohats-blog.detail.textHeadline')) }}</h2>
+                {% endblock %}
+
+            </template>
+        {% endblock %}
+
+        {% block twohats_blog_detail_smart_bar_actions %}
+            <template #smart-bar-actions>
+                {% block twohats_blog_detail_smart_bar_actions_cancel %}
+                    <sw-button
+                        v-tooltip.bottom="tooltipCancel"
+                        class="twohats-blog-detail__back-action"
+                        :disabled="isLoading"
+                        @click="onCancel"
+                        >
+                        {{ $tc('twohats-blog.detail.buttonCancel') }}
+                    </sw-button>
+                {% endblock %}
+
+                {% block twohats_blog_detail_smart_bar_actions_save %}
+                    <sw-button-process
+                        v-tooltip="tooltipSave"
+                        class="twohats-blog-detail__save-action"
+                        :is-loading="isLoading"
+                        :process-success="isSaveSuccessful"
+                        :disabled="isLoading || !acl.can('blogs.editor')"
+                        variant="primary"
+                        @process-finish="saveFinish"
+                        @click.prevent="onSave"
+                        >
+                        {{ $tc('twohats-blog.detail.buttonSave') }}
+                    </sw-button-process>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block twohats_blog_detail_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                    :save-changes-function="saveOnLanguageChange"
+                    :save-permission="acl.can('blogs.editor')"
+                    @on-change="onChangeLanguage"
+                    />
+            </template>
+        {% endblock %}
+
+        {% block twohats_blog_detail_content %}
+            <template #content>
+                <sw-card-view>
+
+                    <div v-show="!isLoading">
+
+                        {% block twohats_blog_detail_content_language_info %}
+                            <sw-language-info
+                                :entity-description="placeholder(blog, 'name', $tc('twohats-blog.detail.textHeadline'))"
+                                />
+                        {% endblock %}
+
+                        {% block twohats_blog_detail_content_detail_base %}
+                            {% block twohats_blog_detail_content_blog %}
+                                <twohats-blog-detail-base
+                                    v-if="blog"
+                                    :blog="blog"
+                                    :allow-edit="acl.can('twohats_blog_blog.editor')"
+                                    />
+                            {% endblock %}
+
+                            {% block twohats_blog_detail_content_media_form %}
+                                <twohats-blog-media-form
+                                    v-if="blog"
+                                    :blog="blog"
+                                    :key="blog.id   "
+                                    :blog-id="blog.id"
+                                    :is-inherited="false"
+                                    :disabled="!acl.can('blog.editor')"
+                                    @media-open="onOpenMediaModal"
+                                    />
+                            {% endblock %}
+
+                            {% block sw_category_detail_menu_media_modal %}
+                                <sw-media-modal-v2
+                                    v-if="showMediaModal"
+                                    :allow-multi-select="false"
+                                    :entity-context="blog.getEntityName()"
+                                    @media-modal-selection-change="onMediaSelectionChange"
+                                    @modal-close="showMediaModal = false"
+                                    />
+                            {% endblock %}
+                        {% endblock %}
+                    </div>
+                </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

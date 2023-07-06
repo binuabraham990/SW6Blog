@@ -1,0 +1,33 @@
+{
+    "twohats-blog": {
+        "label": "Blogs",
+        "module": {
+            "title": "Blogs",
+            "description": "Manage blogs."
+        },
+        "page": {
+            "list": {
+                "column-name": "Name",
+                "column-description": "Description",
+                "column-author": "Author",
+                "contextMenuView": "View/Edit",
+                "contextMenuDelete": "Remove"
+            }
+        },
+        "list": {
+            "buttonAddBlogs": "Add Blog"
+        },
+        "detail": {
+            "textHeadline": "Blog",
+            "buttonCancel": "Cancel",
+            "buttonSave": "Save",
+            "cardTitleBlog": "View/Update Blog",
+            "labelTitle": "Title",
+            "placeholderTitle": "Insert title...",
+            "labelDescription": "Description",
+            "placeholderDescription": "Insert description",
+            "labelAuthor": "Author",
+            "cardTitleBlogMedia": "Blog Media"
+        }
+    }
+}

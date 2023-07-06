@@ -1,0 +1,47 @@
+{% block twohats_blog_detail_base %}
+    <sw-card
+        v-if="blog"
+        position-identifier="twohats-blog-detail-base"
+        :title="$tc('twohats-blog.detail.cardTitleBlog')"
+        :is-loading="isLoading"
+        >
+
+        {% block twohats_blog_detail_base_title %}
+            <sw-field
+                v-model="blog.title"
+                type="text"
+                required
+                :label="$tc('twohats-blog.detail.labelTitle')"
+                :placeholder="placeholder(blog, 'name', $tc('twohats-blog.detail.placeholderTitle'))"
+                :disabled="!allowEdit"
+                />
+        {% endblock %}
+
+        {% block twohats_blog_detail_base_description %}
+            <sw-field
+                v-model="blog.description"
+                type="textarea"
+                :label="$tc('twohats-blog.detail.labelDescription')"
+                :placeholder="placeholder(blog, 'description', $tc('twohats-blog.detail.placeholderDescription'))"
+                :disabled="!allowEdit"
+                />
+        {% endblock %}
+
+        {% block twohats_blog_detail_base_author %}
+            <sw-entity-single-select
+                id="authorId" 
+                :label="$tc('twohats-blog.detail.labelAuthor')"
+                :value="blog.authorId"
+                v-model="blog.authorId"
+                entity="twohats_blog_author"
+                :disabled="!allowEdit"
+                class="sw-select-product__select_manufacturer" 
+                :placeholder="$tc('sw-product.basicForm.placeholderManufacturer')"
+                show-clearable-button
+                allow-entity-creation
+                :entity-creation-label="$tc('sw-product.basicForm.labelManufacturerCreation')"
+                />
+
+        {% endblock %}
+    </sw-card>
+{% endblock %}
