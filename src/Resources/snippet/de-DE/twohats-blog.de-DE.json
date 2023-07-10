@@ -1,0 +1,11 @@
+{
+    "twohats-storefront":   {
+        "blog": {
+            "detail":   {
+                "author-name": "Author: ",
+                "author-nickname": "We call him: "
+            }
+        }
+    }
+            
+}

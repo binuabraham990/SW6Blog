@@ -17,6 +17,7 @@ use TwoHatsBlogModule\Core\Content\Blog\Author\AuthorDefinition;
 use TwoHatsBlogModule\Core\Content\Blog\BlogMedia\BlogMediaDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\CascadeDelete;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\LongTextField;
 
 class BlogDefinition extends EntityDefinition {
 
@@ -38,7 +39,7 @@ class BlogDefinition extends EntityDefinition {
         return new FieldCollection([
             (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
             (new StringField('title', 'title'))->addFlags(new Required()),
-            (new StringField('description', 'description')),
+            (new LongTextField('description', 'description')),
             (new FkField('author_id', 'authorId', AuthorDefinition::class))->addFlags(new ApiAware()),
             (new ManyToOneAssociationField('author', 'author_id', AuthorDefinition::class, 'id'))->addFlags(new ApiAware()),
             (new OneToManyAssociationField('media', BlogMediaDefinition::class, 'blog_id'))->addFlags(new ApiAware(), new CascadeDelete()),

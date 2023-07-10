@@ -18,7 +18,7 @@ class Migration1688379051Blog extends MigrationStep {
         CREATE TABLE IF NOT EXISTS `twohats_blog_blog` (
             `id` binary(16) NOT NULL,
             `title` varchar(256) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
-            `description` varchar(256) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+            `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
             `author_id` binary(16) NULL,
             `created_at` datetime(3) NOT NULL,
             `updated_at` datetime(3) NULL,

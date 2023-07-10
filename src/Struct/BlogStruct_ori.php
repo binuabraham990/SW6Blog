@@ -3,9 +3,9 @@
 namespace TwoHatsBlogModule\Struct;
 
 use Shopware\Core\Framework\Struct\Struct;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\EntitySearchResult;
+use TwoHatsBlogModule\Core\Content\Blog\Blog\BlogCollection;
 
-class BlogStruct extends Struct
+class BlogStruct_ori extends Struct
 {
 
     /**
@@ -13,7 +13,7 @@ class BlogStruct extends Struct
      */
     private $blogs;
 
-    public function __construct(EntitySearchResult $blogs)
+    public function __construct(BlogCollection $blogs)
     {
         $this->blogs = $blogs;
     }
@@ -21,7 +21,7 @@ class BlogStruct extends Struct
     /**
      * @return array
      */
-    public function getBlogs(): EntitySearchResult
+    public function getBlogs(): BlogCollection
     {
         return $this->blogs;
     }
@@ -29,7 +29,7 @@ class BlogStruct extends Struct
     /**
      * @param array $blogs
      */
-    public function setBlogs(EntitySearchResult $blogs): void
+    public function setBlogs(BlogCollection $blogs): void
     {
         $this->blogs = $blogs;
     }

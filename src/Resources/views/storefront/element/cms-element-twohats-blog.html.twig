@@ -3,18 +3,35 @@
     {%  set config = element.fieldConfig.elements %}
     <div class="cms-element-twohats-blog" style="height: 100%; width: 100%">
 
-        {% block element_twohats_blog_content %}
-            <div class="cms-el-twohats-blog">
-                <div class="row">
-                    {% for key,blog in context.context.extensions.twohats_blogs.blogs|slice(0, config.numberOfBlogs.value) %}
-                        <div class="col-3">
-                            <div class="box">
-                                {{ dump(blog) }}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+        {% set searchResult = element.data.blogs %}
+        {% set listingColumns = 'col-sm-6 col-lg-4 col-xl-3' %}
+
+        {% if section and section.type == 'sidebar' %}
+            {% set listingColumns = 'col-sm-6 col-lg-6 col-xl-4' %}
+        {% endif %}
+
+        {% set slot = cmsPage.getFirstElementOfType('twohats-blog') %}
+
+        {% set filterUrl = null %}
+        {% set dataUrl = null %}
+
+        {% set filterUrl = url('twohats.blog.frontend.filter') %}
+        {% set dataUrl = url('twohats.blog.frontend.filter') %}
+
+        {% set sidebar = sectionType == 'sidebar' %}
+        {% set params = { slots: slot.id, 'no-aggregations': 1 } %}
+
+        {% block element_product_listing_wrapper %}
+            {% sw_include '@Storefront/storefront/component/blog/listing.html.twig' with {
+            searchResult: searchResult,
+            dataUrl: dataUrl,
+            filterUrl: filterUrl,
+            params: params,
+            sidebar: sidebar,
+            boxLayout: element.translated.config.boxLayout.value,
+            displayMode: element.translated.config.displayMode.value,
+            listingColumns: listingColumns
+        } %}
         {% endblock %}
     </div>
 {% endblock %}
