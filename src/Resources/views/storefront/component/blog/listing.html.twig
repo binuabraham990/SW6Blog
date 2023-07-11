@@ -20,7 +20,16 @@
          data-listing-options='{{ listingPagination|json_encode }}'>
 
         {% block element_blog_listing_wrapper_content %}
-            {% sw_include '@Storefront/storefront/component/blog/_listing.html.twig' %}
+            {% sw_include '@Storefront/storefront/component/blog/_listing.html.twig' with {
+            searchResult: searchResult,
+            dataUrl: dataUrl,
+            filterUrl: filterUrl,
+            params: params,
+            sidebar: sidebar,
+            boxLayout: element.translated.config.boxLayout.value,
+            displayMode: element.translated.config.displayMode.value,
+            listingColumns: listingColumns
+        } %}
         {% endblock %}
     </div>
 {% endblock %}

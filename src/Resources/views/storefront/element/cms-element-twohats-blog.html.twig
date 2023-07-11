@@ -4,18 +4,12 @@
     <div class="cms-element-twohats-blog" style="height: 100%; width: 100%">
 
         {% set searchResult = element.data.blogs %}
-        {% set listingColumns = 'col-sm-6 col-lg-4 col-xl-3' %}
-
-        {% if section and section.type == 'sidebar' %}
-            {% set listingColumns = 'col-sm-6 col-lg-6 col-xl-4' %}
-        {% endif %}
-
         {% set slot = cmsPage.getFirstElementOfType('twohats-blog') %}
 
         {% set filterUrl = null %}
-{#        {% set dataUrl = null %}#}
+        {#        {% set dataUrl = null %}#}
 
-{#        {% set filterUrl = url('widget.twohats.blog.filter') %}#}
+        {#        {% set filterUrl = url('widget.twohats.blog.filter') %}#}
         {% set dataUrl = url('widget.twohats.blog.filter') %}
 
         {% set sidebar = sectionType == 'sidebar' %}

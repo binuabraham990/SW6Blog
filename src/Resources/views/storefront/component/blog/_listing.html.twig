@@ -23,7 +23,7 @@
             {% if searchResult.total > 0 %}
                 {% block element_blog_listing_col %}
                     {% for blog in searchResult %}
-                        <div class="cms-listing-col {{ listingColumns }}">
+                        <div class="cms-listing-col col-sm-6 col-lg-4 col-xl-3">
                             {% block element_blog_listing_box %}
                                 {% sw_include '@Storefront/storefront/page/twohats/blog-box.html.twig' with {
                                                 'blog': blog,
