@@ -1,0 +1,26 @@
+{% set currentPage = ((searchResult.criteria.offset + 1) / searchResult.criteria.limit )|round(0, 'ceil') %}
+{% set paginationConfig = { page: currentPage }|json_encode %}
+
+{% set listingPagination = {
+    sidebar: sidebar,
+    params: params,
+    dataUrl: dataUrl,
+    filterUrl: filterUrl,
+    disableEmptyFilter: false,
+    snippets: {
+        resetAllButtonText: 'listing.filterPanelResetAll'|trans|sw_sanitize
+    }
+} %}
+
+{% block blog_listing %}
+    <div class="cms-element-product-listing-wrapper"
+         data-listing-pagination="true"
+         data-listing-pagination-options='{{ paginationConfig }}'
+         data-listing="true"
+         data-listing-options='{{ listingPagination|json_encode }}'>
+
+        {% block element_blog_listing_wrapper_content %}
+            {% sw_include '@Storefront/storefront/component/blog/_listing.html.twig' %}
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{#{% block base_head %}
+    {% sw_include '@Storefront/storefront/page/wishlist/meta.html.twig' %}
+{% endblock %}#}
+
+{% block base_content %}
+    {% block page_wishlist %}
+        <div class="cms-page blog-page">
+            {% set searchResult = page.blog.blogListing %}
+
+            {% sw_include '@Storefront/storefront/component/blog/_listing.html.twig' with { searchResult: searchResult } %}
+        </div>
+    {% endblock %}
+{% endblock %}

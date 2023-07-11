@@ -1,0 +1,27 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    <div class="blog-detail">
+        <div class="blog-detail-content">
+            <h1 class="blog-detail-title">{{ blog.title }}</h1>
+            <div class="blog-detail-description">{{ blog.description|raw }}</div>
+            <div class="row blog-detail-images">
+                {% for blogMedias in blog.media %}
+                    <div class="col-3">
+                        <img class="blog-detail-image" src="{{ blogMedias.media.url }}">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="blog-detail-author">
+            {% if blog.author.media.url is defined %}
+                <img class="blog-detail-author-image" 
+                     src="{{ blog.author.media.url }}">
+            {% endif %}
+            <div class="blog-detail-author-details">
+                <div class="blog-detail-author-name">{{ 'twohats-storefront.blog.detail.author-name'|trans }}{{ blog.author.name }}</div>
+                <div class="blog-detail-author-nickname">{{ 'twohats-storefront.blog.detail.author-nickname'|trans }}{{ blog.author.nickname }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

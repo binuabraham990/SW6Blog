@@ -1,0 +1,16 @@
+{
+    "twohats-storefront":   {
+        "blog": {
+            "detail":   {
+                "author-name": "Author : ",
+                "author-nickname": "We call him : "
+            },
+            "list": {
+                "search-placeholder": "Search by author...",
+                "search-button": "Search",
+                "view-more": "View more"
+            }
+        }
+    }
+            
+}

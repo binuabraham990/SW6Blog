@@ -18,7 +18,7 @@
         {% endblock %}
 
         {% block twohats_blog_detail_base_description %}
-            <sw-field
+            <sw-text-editor
                 v-model="blog.description"
                 type="textarea"
                 :label="$tc('twohats-blog.detail.labelDescription')"
@@ -35,11 +35,11 @@
                 v-model="blog.authorId"
                 entity="twohats_blog_author"
                 :disabled="!allowEdit"
-                class="sw-select-product__select_manufacturer" 
-                :placeholder="$tc('sw-product.basicForm.placeholderManufacturer')"
+                class="sw-select-author__select_author" 
+                :placeholder="$tc('twohats-blog.basicForm.placeholderAuthor')"
                 show-clearable-button
                 allow-entity-creation
-                :entity-creation-label="$tc('sw-product.basicForm.labelManufacturerCreation')"
+                :entity-creation-label="$tc('twohats-blog.basicForm.labelAuthor')"
                 />
 
         {% endblock %}

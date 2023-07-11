@@ -15,11 +15,53 @@
             <tag name="shopware.entity.definition" entity="twohats_blog_blog_media" />
         </service>
         
-        
+        <!--        
         <service id="TwoHatsBlogModule\Subscriber\CmsPageLoadedEventSubscriber">
             <argument type="service" id="twohats_blog_blog.repository"/>
             
             <tag name="kernel.event_subscriber"/>
+        </service>-->
+        
+        <service id="TwoHatsBlogModule\Storefront\Controller\BlogController"  public="true">
+            <argument type="service" id="TwoHatsBlogModule\Service\PluginService"/>
+            <argument type="service" id="cms_slot.repository"/>
+            <argument type="service" id="twohats_blog_blog.repository"/>
+            <argument type="service" id="TwoHatsBlogModule\Storefront\Page\Blog\BlogPageLoader"/>
+            
+            
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
         </service>
+        
+        <service id="TwoHatsBlogModule\Service\PluginService"  public="true">
+            <argument type="service" id="twohats_blog_blog.repository"/>
+        </service>
+        
+        <service id="TwoHatsBlogModule\DataResolver\BlogCmsDataResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+        
+        <service id="TwoHatsBlogModule\Storefront\Page\Blog\BlogPageLoader">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="TwoHatsBlogModule\Storefront\Page\Blog\BlogRoute"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+        
+        <service id="TwoHatsBlogModule\Storefront\Page\Blog\BlogRoute" public="true">
+            <argument type="service" id="twohats_blog_blog.repository"/>
+        </service>
+        
+        <service id="TwoHatsBlogModule\Storefront\Page\Blog\AbstractBlogRoute" public="true">
+            <argument type="service" id="customer_wishlist.repository"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Core\Content\Product\SalesChannel\ProductCloseoutFilterFactory"/>
+        </service>
+        
     </services>
 </container>

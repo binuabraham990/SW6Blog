@@ -1,0 +1,21 @@
+<div class="cms-el-twohats-blog">
+    <div class="blog-box">
+        <div class="box">
+            {% if blog.author.media.url is defined %}
+                <div class="author-image">
+                    <img src="{{ blog.author.media.url }}" src="avatar">
+                </div>
+            {% endif %}
+            <div class="blog-author-details">
+                <div class="author-name">{{ blog.author.name }}</div>
+                <span class="author-nickname">{{ blog.author.nickname }}</span>
+                <div class="blog-title">{{ blog.title }}</div>
+                <p class="blog-description">{{ blog.description|length > 100 ? blog.description|slice(0, 100) ~ '...' : blog.description }} 
+                    <a href="{{ path('twohats.blog.frontend.detail', {'id': blog.id}) }}" alt="">
+                        {{ "twohats-storefront.blog.list.view-more"|trans }}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

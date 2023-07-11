@@ -1,18 +1,19 @@
 {
-  "name": "swag/plugin-skeleton",
-  "description": "Blog Module",
-  "type": "shopware-platform-plugin",
-  "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "TwoHatsBlogModule\\": "src/"
+    "name": "swag/plugin-skeleton",
+    "description": "Blog Module",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "version": "1.1.0",
+    "autoload": {
+        "psr-4": {
+            "TwoHatsBlogModule\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "TwoHatsBlogModule\\TwoHatsBlogModule",
+        "label": {
+            "de-DE": "Blog Module",
+            "en-GB": "Blog Module"
+        }
     }
-  },
-  "extra": {
-    "shopware-plugin-class": "TwoHatsBlogModule\\TwoHatsBlogModule",
-    "label": {
-      "de-DE": "Blog Module",
-      "en-GB": "Blog Module"
-    }
-  }
 }
