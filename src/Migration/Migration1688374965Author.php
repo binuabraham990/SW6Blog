@@ -17,7 +17,6 @@ class Migration1688374965Author extends MigrationStep {
         $query = <<<SQL
         CREATE TABLE IF NOT EXISTS `twohats_blog_author` (
             `id` binary(16) NOT NULL,
-            `name` varchar(50) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
             `nickname` varchar(50) COLLATE 'utf8mb4_unicode_ci' NULL,
             `media_id` binary(16) NULL,
             `created_at` datetime(3) NULL,

@@ -14,9 +14,9 @@
         <service id="TwoHatsBlogModule\Core\Content\Blog\BlogMedia\BlogMediaDefinition">
             <tag name="shopware.entity.definition" entity="twohats_blog_blog_media" />
         </service>
-<!--        <service id="TwoHatsBlogModule\Core\Content\Blog\Author\Aggregate\AuthorTranslation\AuthorTranslationDefinition">
+        <service id="TwoHatsBlogModule\Core\Content\Blog\Author\Aggregate\AuthorTranslation\AuthorTranslationDefinition">
             <tag name="shopware.entity.definition" entity="twohats_blog_author_translation" />
-        </service>-->
+        </service>
         
         <!--        
         <service id="TwoHatsBlogModule\Subscriber\CmsPageLoadedEventSubscriber">

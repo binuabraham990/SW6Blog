@@ -7,30 +7,16 @@ namespace TwoHatsBlogModule\Core\Content\Blog\Author\Aggregate\AuthorTranslation
 use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 use TwoHatsBlogModule\Core\Content\Blog\Author\Aggregate\AuthorTranslation\AuthorTranslationEntity;
 
-#[Package('content')]
+/**
+ * @method void                          add(AuthorTranslationEntity $entity)
+ * @method void                          set(string $key, AuthorTranslationEntity $entity)
+ * @method AuthorTranslationEntity[]    getIterator()
+ * @method AuthorTranslationEntity[]    getElements()
+ * @method AuthorTranslationEntity|null get(string $key)
+ * @method AuthorTranslationEntity|null first()
+ * @method AuthorTranslationEntity|null last()
+ */
 class AuthorTranslationCollection extends EntityCollection {
-
-    /**
-     * @return list<string>
-     */
-    public function getAuthorIds(): array {
-        return $this->fmap(fn(AuthorTranslationEntity $authorTranslation) => $authorTranslation->getAuthorId());
-    }
-
-    public function filterByAuthorId(string $id): self {
-        return $this->filter(fn(AuthorTranslationEntity $authorTranslation) => $authorTranslation->getAuthorId() === $id);
-    }
-
-    /**
-     * @return list<string>
-     */
-    public function getLanguageIds(): array {
-        return $this->fmap(fn(AuthorTranslationEntity $authorTranslation) => $authorTranslation->getLanguageId());
-    }
-
-    public function filterByLanguageId(string $id): self {
-        return $this->filter(fn(AuthorTranslationEntity $authorTranslation) => $authorTranslation->getLanguageId() === $id);
-    }
 
     public function getApiAlias(): string {
         return 'author_translation_collection';
