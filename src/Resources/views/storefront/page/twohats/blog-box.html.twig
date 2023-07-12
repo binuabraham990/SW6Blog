@@ -3,7 +3,12 @@
         <div class="box">
             {% if blog.author.media.url is defined %}
                 <div class="author-image">
-                    <img src="{{ blog.author.media.url }}" src="avatar">
+                    {% if blog.media.elements|length > 0 %}
+                        {% set firstBlogMedia = blog.media.elements|first %}
+                        <img src="{{ firstBlogMedia.media.url }}" src="avatar">
+                    {% else %}
+                        <img src="{{ blog.author.media.url }}" src="avatar">
+                    {% endif %}
                 </div>
             {% endif %}
             <div class="blog-author-details">

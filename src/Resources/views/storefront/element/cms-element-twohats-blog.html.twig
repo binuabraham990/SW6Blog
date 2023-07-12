@@ -4,13 +4,14 @@
     <div class="cms-element-twohats-blog" style="height: 100%; width: 100%">
 
         {% set searchResult = element.data.blogs %}
+        {% set authorsResult = element.data.authors %}
         {% set slot = cmsPage.getFirstElementOfType('twohats-blog') %}
 
         {% set filterUrl = null %}
-        {#        {% set dataUrl = null %}#}
+        {% set dataUrl = null %}
 
-        {#        {% set filterUrl = url('widget.twohats.blog.filter') %}#}
-        {% set dataUrl = url('widget.twohats.blog.filter') %}
+        {% set filterUrl = url('widget.twohats.blog.data', {'limit': config.numberOfBlogs.value}) %}
+        {% set dataUrl = url('widget.twohats.blog.data', {'limit': config.numberOfBlogs.value}) %}
 
         {% set sidebar = sectionType == 'sidebar' %}
         {% set params = { slots: slot.id, 'no-aggregations': 1 } %}
@@ -18,6 +19,7 @@
         {% block element_product_listing_wrapper %}
             {% sw_include '@Storefront/storefront/component/blog/listing.html.twig' with {
             searchResult: searchResult,
+            authorsResult: authorsResult,
             dataUrl: dataUrl,
             filterUrl: filterUrl,
             params: params,

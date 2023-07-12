@@ -7,6 +7,7 @@ namespace TwoHatsBlogModule\Core\Content\Blog\Author;
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 use Shopware\Core\Content\Media\MediaEntity;
+//use TwoHatsBlogModule\Core\Content\Blog\Author\Aggregate\AuthorTranslation\AuthorTranslationCollection;
 
 class AuthorEntity extends Entity {
 
@@ -31,6 +32,11 @@ class AuthorEntity extends Entity {
      * @var MediaEntity|null
      */
     protected $media;
+
+    /**
+     * @var AuthorTranslationCollection|null
+     */
+//    protected $translations;
 
     public function getName(): ?string {
         return $this->name;
@@ -63,4 +69,12 @@ class AuthorEntity extends Entity {
     public function setMedia(MediaEntity $media): void {
         $this->media = $media;
     }
+
+//    public function getTranslations(): ?AuthorTranslationCollection {
+//        return $this->translations;
+//    }
+//
+//    public function setTranslations(AuthorTranslationCollection $translations): void {
+//        $this->translations = $translations;
+//    }
 }

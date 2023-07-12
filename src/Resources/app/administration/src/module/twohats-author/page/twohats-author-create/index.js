@@ -20,6 +20,9 @@ export default {
 
     methods: {
         createdComponent() {
+            if (!Shopware.State.getters['context/isSystemDefaultLanguage']) {
+                Shopware.Context.api.languageId = Shopware.Context.api.systemLanguageId;
+            }
             this.isLoading = true;
             this.author = this.authorRepository.create();
             this.newAuthorId = this.author.id;

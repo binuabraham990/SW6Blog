@@ -61,9 +61,6 @@ class BlogRoute extends AbstractBlogRoute {
         
         $blogs = $this->blogRepository->search($criteria, $context->getContext());
 
-//        $wishlist = $this->loadWishlist($context, $customer->getId());
-//        $products = $this->loadProducts($wishlist->getId(), $criteria, $context, $request);
-
         return new BlogRouteResponse($blogs);
     }
 }

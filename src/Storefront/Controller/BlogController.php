@@ -13,6 +13,8 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use TwoHatsBlogModule\Storefront\Page\Blog\BlogPageLoader;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsAnyFilter;
 
 /**
  * @Route(defaults={"_routeScope"={"storefront"}})
@@ -72,8 +74,8 @@ class BlogController extends StorefrontController {
         return $response;
     }
 
-    #[Route(path: '/widget/twohats/blog/filter', name: 'widget.twohats.blog.filter', options: ['seo' => false], defaults: ['XmlHttpRequest' => true], methods: ['GET', 'POST'])]
-    public function filter(Request $request, SalesChannelContext $context): Response {
+    #[Route(path: '/widget/twohats/blog/data/{limit}', name: 'widget.twohats.blog.data', options: ['seo' => false], defaults: ['XmlHttpRequest' => true], methods: ['GET', 'POST'])]
+    public function data($limit, Request $request, SalesChannelContext $context): Response {
 
 //        $page = $this->blogPageLoader->load($request, $context);
 //        $response = $this->renderStorefront('@Storefront/storefront/component/blog/_listing.html.twig', ['page' => $page]);
@@ -81,13 +83,9 @@ class BlogController extends StorefrontController {
 //
 //        return new Response($response->getContent());
         $nextPage = $request->query->get('p');
-        $slotId = $request->query->get('slots');
-
-        $slot = $this->cmsSlotRepository->search(new Criteria([$slotId]), $context->getContext())->first();
-        $slotConfig = $slot->getConfig();
-//        $limitPerPage = $slotConfig['numberOfBlogs']['value'];
-        $limitPerPage = 2;
-        $offSet = $limitPerPage * ($nextPage - 1) + 1;
+        $limitPerPage = $limit;
+        $offSet = $limitPerPage * ($nextPage - 1);
+        $filterAuthor = $request->query->get('blog-author');
 
         // Allows to fetch only aggregations over the gateway.
         $request->request->set('only-aggregations', true);
@@ -100,15 +98,19 @@ class BlogController extends StorefrontController {
         $criteria->addAssociation('author.media');
         $criteria->addAssociation('media.media');
         $criteria->addSorting(new FieldSorting('createdAt', FieldSorting::DESCENDING));
+
+        if ($filterAuthor) {
+            $authorIds = explode('|', $filterAuthor);
+            $criteria->addFilter(new EqualsAnyFilter('author.id', $authorIds));
+        }
         $criteria->setOffset($offSet);
         $criteria->setLimit($limitPerPage);
         $criteria->setTotalCountMode(Criteria::TOTAL_COUNT_MODE_EXACT);
         $blogDetails = $this->blogRepository->search($criteria, $context->getContext());
-        
+
         $response = $this->renderStorefront('@SwagBasicExample/storefront/component/blog/_listing.html.twig', [
             'searchResult' => $blogDetails
         ]);
-        
 
         $response = new Response($response);
 

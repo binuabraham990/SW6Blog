@@ -15,6 +15,9 @@ use Shopware\Core\Content\Media\MediaDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
 use TwoHatsBlogModule\Core\Content\Blog\Author\AuthorCollection;
+//use Shopware\Core\Framework\DataAbstractionLayer\Field\TranslatedField;
+//use Shopware\Core\Framework\DataAbstractionLayer\Field\TranslationsAssociationField;
+//use TwoHatsBlogModule\Core\Content\Blog\Author\Aggregate\AuthorTranslation\AuthorTranslationDefinition;
 
 class AuthorDefinition extends EntityDefinition {
 
@@ -36,9 +39,12 @@ class AuthorDefinition extends EntityDefinition {
         return new FieldCollection([
             (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
             (new StringField('name', 'name'))->addFlags(new Required()),
+//            (new TranslatedField('name'))->addFlags(new ApiAware()),
             (new StringField('nickname', 'nickname')),
             (new FkField('media_id', 'mediaId', MediaDefinition::class))->addFlags(new ApiAware()),
             (new ManyToOneAssociationField('media', 'media_id', MediaDefinition::class, 'id', false))->addFlags(new ApiAware()),
+            
+//            (new TranslationsAssociationField(AuthorTranslationDefinition::class, 'author_id'))->addFlags(new ApiAware(), new Required()),
         ]);
     }
 }
